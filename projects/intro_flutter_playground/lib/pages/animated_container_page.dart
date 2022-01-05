@@ -30,8 +30,6 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AnimatedContainerPage extends StatefulWidget {
@@ -47,28 +45,6 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
   Color _color = Colors.red;
   BorderRadiusGeometry _borderRadius = BorderRadius.circular(16);
 
-  // Create a random number generator.
-  final random = Random();
-
-  void _randomize() {
-    setState(() {
-      // Generate a random width and height.
-      _width = random.nextInt(300).toDouble();
-      _height = random.nextInt(300).toDouble();
-
-      // Generate a random color.
-      _color = Color.fromRGBO(
-        random.nextInt(256),
-        random.nextInt(256),
-        random.nextInt(256),
-        1,
-      );
-
-      // Generate a random border radius.
-      _borderRadius = BorderRadius.circular(random.nextInt(100).toDouble());
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +52,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
         title: Text('AnimatedContainer'),
       ),
       body: Center(
-        child: AnimatedContainer(
+        child: Container(
           // Use the properties stored in the State class.
           width: _width,
           height: _height,
@@ -84,16 +60,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
             color: _color,
             borderRadius: _borderRadius,
           ),
-          // Define how long the animation should take.
-          duration: Duration(seconds: 1),
-          // Provide an optional curve to make the animation feel smoother.
-          curve: Curves.fastOutSlowIn, // fastOutSlowIn
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.play_arrow),
-        // When the user taps the button
-        onPressed: _randomize,
       ),
     );
   }
