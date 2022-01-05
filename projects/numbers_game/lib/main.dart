@@ -44,6 +44,9 @@ class TargetData {
 
 class GameTimer {
   Timer? _timer;
+
+  // 会变化的值，自动 rerender 吗？-> 不是!
+  // 意思是一个会变化的管道，我们可以监听它！
   ValueNotifier<int> remainingSeconds = ValueNotifier<int>(10);
 
   void startGame() {
@@ -156,7 +159,7 @@ class _GameWidgetState extends State<GameWidget> {
           // Player
           AnimatedAlign(
             alignment: _playerAlignment,
-            duration: const Duration(milliseconds: 250),
+            duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
             child: Container(
               width: 100,
